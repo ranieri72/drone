@@ -15,8 +15,6 @@ int velMotor;
 int numMotor;
 
 char tecla;
-String message1;
-String message2;
 
 void setup() {
   // put your setup code here, to run once:
@@ -30,13 +28,18 @@ void setup() {
 
   velInput = 50;
   numMotor = 1;
-  Serial.println("Digite uma opcao: \nW para aumentar a velocidade \nS para diminuir a velocidade \nP para parar \nOu digite um numero de 1 a 4 para selecionar um motor.");
+  Serial.println("Digite uma opcao:");
+  Serial.println("[1-4] - selecionara um motor");
+  Serial.println("W - Acelerar");
+  Serial.println("S - Desacelerar");
+  Serial.println("P - Parar");
 }
 
 void loop() {
+  
   // put your main code here, to run repeatedly:
   tecla = Serial.read();
-
+  // TODO procurar codigo de filtragem
   switch (tecla) {
     case 'w':
       velInput = velInput + 10;
@@ -81,9 +84,10 @@ void calcularInputVelocidade() {
       Serial.println("Velocidade maxima permitida!");
       return;
     }
-    message1 = "Velocidade recalculada\nMotor: " + numMotor;
-    message2 = " - Velocidade: " + velInput;
-    Serial.println(message1 + message2);
+    
+    Serial.println("Velocidade recalculada");
+    Serial.print(" - Motor:"); Serial.println(numMotor);
+    Serial.print(" - Velocidade:"); Serial.println(velInput);
   } else {
     Serial.println("Motor parado");
   }
